@@ -1,0 +1,47 @@
+{
+  "name": "game",
+  "version": "1.0.0",
+  "description": "\"# game\"",
+  "main": "index.js",
+  "engines": {
+    "node": "11.2.0"
+  },
+  "scripts": {
+    "start": "node dist/main.js",
+    "dev": "webpack --watch --color --progress",
+    "build": "webpack",
+    "debug": "node --inspect dist/main.js",
+    "heroku-postbuild": "npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/runtime": "^7.3.1",
+    "brfs": "^2.0.1",
+    "clean-webpack-plugin": "^1.0.1",
+    "dotenv": "^6.2.0",
+    "expose-loader": "^0.7.5",
+    "express": "^4.16.4",
+    "gsap": "^2.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "json-loader": "^0.5.7",
+    "pixi.js": "^4.8.5",
+    "transform-loader": "^0.2.4",
+    "uglify-js": "^3.4.9",
+    "webpack-cdn-plugin": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "babel-loader": "^8.0.5",
+    "dotenv-webpack": "^1.7.0",
+    "nodemon": "^1.18.9",
+    "nodemon-webpack-plugin": "^4.0.7",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-node-externals": "^1.7.2"
+  }
+}

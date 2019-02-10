@@ -1,0 +1,6 @@
+export { default as Pawn } from './Pawn.class'
+export { default as GameSection } from './GameSection.class'
+export { default as GameLine } from './GameLine.class'
+export { default as FinishLine } from './FinishLine.class'
+export { default as BrokenLine } from './BrokenLine.class'
+export { default as BoardContainer } from './BoardContainer.class'

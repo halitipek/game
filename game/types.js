@@ -1,0 +1,8 @@
+export const BOARD_CONTAINER = 'BOARD_CONTAINER'
+export const GAME_SECTION = 'GAME_SECTION'
+export const GAME_LINE = 'GAME_LINE'
+export const FINISH_LINE = 'FINISH_LINE'
+export const BROKEN_LINE = 'BROKEN_LINE'
+export const GAME_PAWN = 'GAME_PAWN'
+export const HIT_REC = 'HIT_REC'
+export const BROKEN_COUNTER = 'BROKEN_COUNTER'
