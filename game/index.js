@@ -58,7 +58,7 @@ const config = {
   height: window.innerHeight,
   antialias: true,
   transparent: false,
-  resolution: 1
+  resolution: devicePixelRatio
 }
 
 let app = new Application(config)
