@@ -1,6 +1,5 @@
 import * as helpers from './helpers'
 import { BoardContainer as BoardContainerClass } from './classes'
-import scaleToWindow from './scaleToWindow'
 
 let boardContainer, board, sectionArr = [], lineArr = [], userPawnArr = [], opponentPawnArr = [], sideLineArr = [], brokenLineArr = []
 
@@ -65,7 +64,7 @@ const config = {
 let app = new Application(config)
 app.renderer.view.style.position = "absolute"
 app.renderer.view.style.display = "block"
-//app.renderer.autoResize = true
+app.renderer.autoResize = true
 
 // SETUP
 const setup = () => {
@@ -117,11 +116,12 @@ const setup = () => {
   app.stage.addChild(boardContainer)
 
   const resize = () => {
-    // app.renderer.resize(window.innerWidth, window.innerHeight)
+    app.renderer.resize(window.innerWidth, window.innerHeight)
     boardContainer.calculateBoardContainer(app)
   }
   
   window.addEventListener('resize', resize)
+  window.addEventListener('orientationchange', resize)
   
   document.getElementById('game').appendChild(app.view)
   
