@@ -52,7 +52,6 @@ export function onDragEnd() {
     lines.push(this._getMyFinishLine())
 
     const newParent = lines.find(line => {
-      console.log(line)
       let center = line.toLocal(this.getGlobalPosition())
       center.x += this.width / 2
       center.y += this.height / 2

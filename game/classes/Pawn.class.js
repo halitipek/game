@@ -29,11 +29,8 @@ class Pawn extends PIXI.Sprite {
     if (newParent.xType === types.FINISH_LINE) {
       this.setSide()
     }
-
-    const newPosition = newParent.toLocal(this.getGlobalPosition())
-    this.position.x = newPosition.x
-    this.position.y = newPosition.y
-    this.setParent(newParent)
+    newParent.toLocal(new PIXI.Point(0,0), this, this.position)
+    newParent.addChild(this)
   }
 
   setSolid () {

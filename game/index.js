@@ -1,5 +1,6 @@
 import * as helpers from './helpers'
 import { BoardContainer as BoardContainerClass } from './classes'
+import config from './config'
 
 let boardContainer, board, sectionArr = [], lineArr = [], userPawnArr = [], opponentPawnArr = [], sideLineArr = [], brokenLineArr = []
 
@@ -52,14 +53,6 @@ let Application = PIXI.Application,
     loader = PIXI.loader,
     resources = PIXI.loader.resources,
     Sprite = PIXI.Sprite
-
-const config = {
-  width: 800,
-  height: 800,
-  antialias: true,
-  transparent: false,
-  resolution: devicePixelRatio
-}
 
 let app = new Application(config)
 app.renderer.view.style.position = "absolute"
