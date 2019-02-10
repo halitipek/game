@@ -5,25 +5,20 @@ export function onDragStart(event) {
     this.homeParent = this.parent
     this.previousParent = this.parent
     this.dragging = true
+
     this.dragPoint = this.getGlobalPosition()
-    const boardContainer = this._getBoard()
-    this.setParentCustom(boardContainer)
+    this.setParentCustom(this._getBoard())
     this.setSelected()
   }
 }
 
 export function onDragMove(e) {
-  if (this.dragging) {
-    const boardContainer = this._getBoard()
-    
-    this.globalPoint = { x: this.dragPoint.x - (this.startPoint.x - e.data.global.x), y: this.dragPoint.y - (this.startPoint.y - e.data.global.y) }
+  if (this.dragging) {    
+    //this.globalPoint = { x: this.dragPoint.x - (this.startPoint.x - e.data.global.x), y: this.dragPoint.y - (this.startPoint.y - e.data.global.y) }
 
-    const newPosition = this.parent.toLocal(this.globalPoint)
+    const newPosition = this.parent.toLocal(e.data.global)
     this.position.x = newPosition.x
     this.position.y = newPosition.y
-
-    newPosition.x += this.width / 2
-    newPosition.y += this.height / 2
 
     const newParent = this._getLines().find(line => {
       let center = line.toLocal(this.globalPoint)
@@ -47,7 +42,7 @@ export function onDragMove(e) {
 export function onDragEnd() {
   if (this.dragging) {
     this.dragging = false
-    
+
     let lines = this._getLines()
     lines.push(this._getMyFinishLine())
 
@@ -61,6 +56,11 @@ export function onDragEnd() {
 
     this.setSolid()
     this.setParentCustom(newParent)
+
+    this.startPoint = null
+    this.homeParent = null
+    this.previousParent = null
+    this.dragPoint = null
   }
 }
 
