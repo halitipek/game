@@ -117,7 +117,7 @@ const setup = () => {
   app.stage.addChild(boardContainer)
 
   const resize = () => {
-    app.renderer.resize(window.innerWidth, window.innerHeight)
+    // app.renderer.resize(window.innerWidth, window.innerHeight)
     boardContainer.calculateBoardContainer(app)
   }
   
