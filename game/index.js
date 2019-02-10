@@ -58,13 +58,13 @@ const config = {
   height: window.innerHeight,
   antialias: true,
   transparent: false,
-  resolution: devicePixelRatio
+  resolution: 1
 }
 
 let app = new Application(config)
 app.renderer.view.style.position = "absolute"
 app.renderer.view.style.display = "block"
-app.renderer.autoResize = true
+//app.renderer.autoResize = true
 
 // SETUP
 const setup = () => {

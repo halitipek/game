@@ -71,12 +71,14 @@ module.exports = [
           {
             name: 'pixi.js',
             var: 'PIXI',
-            path: 'dist/pixi.min.js'
+            path: 'dist/pixi.min.js',
+            prodUrl: '//unpkg.com/pixi.js@4.8.5/dist/pixi.min.js'
           },
           {
             name: 'gsap',
             var: 'TweenMax',
-            path: 'umd/TweenMax.js'
+            path: 'umd/TweenMax.js',
+            prodUrl: '//unpkg.com/gsap@2.0.2/umd/TweenMax.js'
           }
         ],
         prod: true,

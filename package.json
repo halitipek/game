@@ -18,17 +18,9 @@
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.3.1",
-    "brfs": "^2.0.1",
-    "clean-webpack-plugin": "^1.0.1",
     "dotenv": "^6.2.0",
-    "expose-loader": "^0.7.5",
     "express": "^4.16.4",
-    "gsap": "^2.0.2",
     "html-webpack-plugin": "^3.2.0",
-    "json-loader": "^0.5.7",
-    "pixi.js": "^4.8.5",
-    "transform-loader": "^0.2.4",
-    "uglify-js": "^3.4.9",
     "webpack-cdn-plugin": "^3.0.0"
   },
   "devDependencies": {
