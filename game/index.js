@@ -1,5 +1,6 @@
 import * as helpers from './helpers'
 import { BoardContainer as BoardContainerClass } from './classes'
+import scaleToWindow from './scaleToWindow'
 
 let boardContainer, board, sectionArr = [], lineArr = [], userPawnArr = [], opponentPawnArr = [], sideLineArr = [], brokenLineArr = []
 
