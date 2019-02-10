@@ -11,13 +11,29 @@
       height: 800px;
       overflow: auto;
     }
-    
-    #game {
-      position: fixed;
-    }
   </style>
 </head>
 <body>
   <div id="game"></div>
+
+  <script>
+    function resize () {
+      let ratio = (100 * window.innerHeight) / 768 / 100
+      let width = 1147 * ratio
+      let height = 768 * ratio
+
+      console.log(ratio, width, height, window.innerWidth - width)
+
+      const game = document.getElementById('game')
+      game.style.position = 'fixed'
+      game.style.left = ((window.innerWidth - width) / 2) + 'px'
+      game.style.width = width + 'px'
+      game.style.height = height + 'px'
+    }
+
+    window.addEventListener('resize', resize)
+
+    resize()
+  </script>
 <script type="text/javascript" src="//unpkg.com/pixi.js@4.8.5/dist/pixi.min.js"></script><script type="text/javascript" src="//unpkg.com/gsap@2.0.2/umd/TweenMax.js"></script><script type="text/javascript" src="/game.js"></script></body>
 </html>

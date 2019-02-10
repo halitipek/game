@@ -54,8 +54,8 @@ let Application = PIXI.Application,
     Sprite = PIXI.Sprite
 
 const config = {
-  width: window.innerWidth,
-  height: window.innerHeight,
+  width: 800,
+  height: 800,
   antialias: true,
   transparent: false,
   resolution: devicePixelRatio
@@ -116,7 +116,7 @@ const setup = () => {
   app.stage.addChild(boardContainer)
 
   const resize = () => {
-    app.renderer.resize(window.innerWidth, window.innerHeight)
+    // app.renderer.resize(window.innerWidth, window.innerHeight)
     boardContainer.calculateBoardContainer(app)
   }
   

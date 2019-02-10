@@ -11,17 +11,17 @@ class BoardContainer extends PIXI.Container {
     this.height = ratios.H
     this.xType = types.BOARD_CONTAINER
     this.name = types.BOARD_CONTAINER
+    this.position.set(0, 0)
   }
 
   calculateBoardContainer (app) {
     let ratio = (100 * window.innerHeight) / ratios.H / 100
 
-    this.width = ratios.W / 100 * ratio
-    this.height = ratios.H / 100 * ratio
-  
-    this.position.set(window.innerWidth / 2, window.innerHeight / 2)
+    app.renderer.resize(ratios.W * ratio, ratios.H * ratio)
+    
+    this.width = ratios.W * ratio
+    this.height = ratios.H * ratio
     this.scale.set(ratio, ratio)
-    this.pivot.set(ratios.W / 2, ratios.H / 2)
   }
 }
 
