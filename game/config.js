@@ -4,5 +4,5 @@ export default {
   antialias: true,
   transparent: false,
   resolution: devicePixelRatio,
-  legacy:true
+  legacy:true,
 }
