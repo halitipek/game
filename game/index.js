@@ -7,10 +7,10 @@ let boardContainer, board, sectionArr = [], lineArr = [], userPawnArr = [], oppo
 const user = {
   color: 'white',
   board: [
-    1, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 1,
-    1, 0, 0, 0, 3, 0,
-    5, 0, 0, 0, 0, 1
+    2, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 5,
+    0, 0, 0, 0, 3, 0,
+    5, 0, 0, 0, 0, 0
   ],
   number: 0
 }
@@ -18,10 +18,10 @@ const user = {
 const opponent = {
   color: 'black',
   board: [
+    0, 0, 0, 0, 0, 5,
     0, 1, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0
+    5, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 1
   ],
   number: 1
 }
