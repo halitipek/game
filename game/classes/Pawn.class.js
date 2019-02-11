@@ -5,10 +5,8 @@ import * as types from '../types'
 class Pawn extends PIXI.Sprite {
   constructor(pawnObj, color, isUser) {
     super(PIXI.loader.resources[pawnObj.solid].texture)
-
-    this.solidTexture = PIXI.loader.resources[pawnObj.solid].texture
-    this.sideTexture = PIXI.loader.resources[pawnObj.side].texture
-    this.selectedTexture = PIXI.loader.resources[pawnObj.selected].texture
+    
+    this.pawnObj = pawnObj
     this.color = color
     this.isUser = isUser
     this.cursor = 'pointer'
@@ -34,15 +32,15 @@ class Pawn extends PIXI.Sprite {
   }
 
   setSolid () {
-    this.texture = this.solidTexture
+    this.texture = PIXI.loader.resources[this.pawnObj.solid].texture
   }
 
   setSide () {
-    this.texture = this.sideTexture
+    this.texture = PIXI.loader.resources[this.pawnObj.side].texture
   }
 
   setSelected () {
-    this.texture = this.selectedTexture
+    this.texture = PIXI.loader.resources[this.pawnObj.selected].texture
   }
 
   subscribe () {
@@ -63,6 +61,10 @@ class Pawn extends PIXI.Sprite {
 
   goToFinishLine () {
     
+  }
+
+  goToLine (lineNumber) {
+   this.setParentCustom(this._getOneLine(lineNumber))
   }
 }
 

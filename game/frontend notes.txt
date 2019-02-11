@@ -1,0 +1,24 @@
+#front end
+
+##başlangıç
+
+- board oluştur
+- section oluştur
+- game line oluştur
+- broken line oluştur
+- finish line oluştur
+- taşları oluştur her biri için 15 tane
+- gelen game obj içinde board vs proplara göre yerleştir
+
+sectionArr, lineArr, brokenLineArr, finishLineArr, whitePawnArr, blackPawnArr
+
+boardContainer: {
+  line0: [],
+  ...
+  line23: [],
+  brokenLine0: [],
+  brokenLine1: [],
+  finishLine0: [],
+  finishLine1: []
+}
+

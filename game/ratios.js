@@ -48,6 +48,6 @@ export const broken_line = {
   width: PAWN,
   height: PAWN + COUNT_HEIGHT,
   x: LEFT + section.width + ((MIDDLE - PAWN) / 2),
-  y0: (H / 2) - ((PAWN + COUNT_HEIGHT) * 2),
-  y1: (H / 2) + ((PAWN + COUNT_HEIGHT) * 1)
+  y_opp: (H / 2) - ((PAWN + COUNT_HEIGHT) * 2),
+  y_user: (H / 2) + ((PAWN + COUNT_HEIGHT) * 1)
 }

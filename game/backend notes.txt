@@ -1,0 +1,25 @@
+#backend
+
+##başlangıç
+
+const user = {
+  color: String: 'white' || 'black',
+  moves: 
+}
+
+const opp = {
+  color: String: 'white' || 'black'
+}
+
+const game = {
+  board: Array of Pair Arrays: [ [2, 0], [0, 0] ], length = 24,
+  broken: {
+    white: [],
+    black: []
+  },
+  finish: {
+    white: [],
+    black: []
+  },
+  canDouble: Boolean
+}

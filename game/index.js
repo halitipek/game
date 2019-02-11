@@ -1,52 +1,11 @@
 import * as helpers from './helpers'
 import { BoardContainer as BoardContainerClass } from './classes'
 import config from './config'
+import * as img from './image_constants'
 
-let boardContainer, board, sectionArr = [], lineArr = [], userPawnArr = [], opponentPawnArr = [], sideLineArr = [], brokenLineArr = []
+let boardContainer, lineArr = [], whitePawnArr = [], blackPawnArr = [], finishLineArr = [], brokenLineArr = []
 
-const user = {
-  color: 'white',
-  board: [
-    2, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 5,
-    0, 0, 0, 0, 3, 0,
-    5, 0, 0, 0, 0, 0
-  ],
-  number: 0
-}
-
-const opponent = {
-  color: 'black',
-  board: [
-    0, 0, 0, 0, 0, 5,
-    0, 1, 0, 0, 0, 0,
-    5, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 1
-  ],
-  number: 1
-}
-
-const boardPng = 'board.png'
-const userPawnPng = `${user.color}_pawn.png`
-const userPawnSidePng = `${user.color}_pawn2.png`
-const userPawnSelectedPng = `${user.color}_pawn_selected.png`
-const opponentPawnPng = `${opponent.color}_pawn.png`
-const opponentPawnSidePng = `${opponent.color}_pawn2.png`
-const opponentPawnSelectedPng = `${opponent.color}_pawn_selected.png`
-const lineSelectedPng = 'line_selected.png'
-
-const userPawns = {
-  solid: userPawnPng,
-  side: userPawnSidePng,
-  selected: userPawnSelectedPng
-}
-
-const opponentPawns = {
-  solid: opponentPawnPng,
-  side: opponentPawnSidePng,
-  selected: opponentPawnSelectedPng
-}
-
+/* APP START */
 PIXI.utils.skipHello()
 
 let Application = PIXI.Application,
@@ -58,80 +17,95 @@ let app = new Application(config)
 app.renderer.view.style.position = "absolute"
 app.renderer.view.style.display = "block"
 app.renderer.autoResize = true
+/* APP END */
+
+const user = {
+  color: 'white',
+}
+
+const opponent = {
+  color: 'black',
+}
+
+const game = {
+  board: [
+    [2, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 5],
+    [0, 0], [0, 3], [0, 0], [0, 0], [0, 0], [5, 0],
+    [0, 5], [0, 0], [0, 0], [0, 0], [3, 0], [0, 0],
+    [5, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 2]
+  ],
+  broken: {
+    white: 0,
+    black: 0
+  },
+  finish: {
+    white: 0,
+    black: 0
+  },
+  canDouble: false
+}
 
 // SETUP
 const setup = () => {
   boardContainer = new BoardContainerClass(user, opponent)
 
-  board = new Sprite(resources[boardPng].texture)
+  let board = new Sprite(resources[img.boardPng].texture)
   boardContainer.addChild(board)
-  
-  sectionArr = helpers.createSections()
-  boardContainer.addChild(...sectionArr)
 
-  lineArr = helpers.createGameLines()
-  sectionArr.forEach((sec, i, arr) => {
-    const chunk = lineArr.length / arr.length
-    sec.addChild(
-      ...lineArr.slice(chunk * i, chunk * (i + 1))
-    )
+  lineArr = helpers.createGameLines(user)
+  boardContainer.addChild(...lineArr)
 
-    sec.orderLines()
-  })
+  finishLineArr = helpers.createFinishLines(user)
+  boardContainer.addChild(...finishLineArr)
 
-  sideLineArr = helpers.createFinishLines(user.number, opponent.number)
-  boardContainer.addChild(...sideLineArr)
-
-  brokenLineArr = helpers.createBrokenLine(user.number, opponent.number)
+  brokenLineArr = helpers.createBrokenLine(user)
   boardContainer.addChild(...brokenLineArr)
 
-  userPawnArr = helpers.createPawns(userPawns, user.color, true, 15)
-  opponentPawnArr = helpers.createPawns(opponentPawns, opponent.color, false, 15)
+  whitePawnArr = helpers.createPawns(img.whitePawnObj, 'white', user.color === 'white')
+  blackPawnArr = helpers.createPawns(img.blackPawnObj, 'black', user.color === 'black')
 
-  lineArr.reduce((acc, cur, i, arr) => {
-    if (user.board[i] > 0) {
-      cur.addChild(...userPawnArr.slice(acc.user, acc.user + user.board[i]))
-      acc.user += user.board[i]
+  game.board.forEach((pair, i) => {
+    if (pair[0] || pair[1]) {
+      let toAdd = pair[0]
+        ? whitePawnArr.splice(0, pair[0])
+        : blackPawnArr.splice(0, pair[1])
+
+      lineArr
+        .find(line => line.number === i)
+        .addChild(...toAdd)
     }
+  })
 
-    if (opponent.board[i] > 0) {
-      cur.addChild(...opponentPawnArr.slice(acc.opponent, acc.opponent + opponent.board[i]))
-      acc.opponent += opponent.board[i]
-    }
+  game.broken.white && brokenLineArr.find(line => line.color === 'white').addChild(...whitePawnArr.splice(0, game.broken.white))
+  game.broken.black && brokenLineArr.find(line => line.color === 'black').addChild(...blackPawnArr.splice(0, game.broken.black))
 
-    cur.orderPawns()
-
-    return acc
-  }, { user: 0, opponent: 0 })
+  game.finish.white && finishLineArr.find(line => line.color === 'white').addChild(...whitePawnArr.splice(0, game.finish.white))
+  game.finish.black && finishLineArr.find(line => line.color === 'black').addChild(...blackPawnArr.splice(0, game.finish.black))
 
   boardContainer.calculateBoardContainer(app)
 
   app.stage.addChild(boardContainer)
 
-  const resize = () => {
-    // app.renderer.resize(window.innerWidth, window.innerHeight)
-    boardContainer.calculateBoardContainer(app)
-  }
-  
+  const resize = () => boardContainer.calculateBoardContainer(app)
   window.addEventListener('resize', resize)
   window.addEventListener('orientationchange', resize)
   
   document.getElementById('game').appendChild(app.view)
-  
+
   resize()
 }
 
 const pixiLoader = () => {
   loader
     .add([
-      boardPng, 
-      userPawnPng, 
-      opponentPawnPng,
-      userPawnSidePng,
-      opponentPawnSidePng,
-      userPawnSelectedPng,
-      opponentPawnSelectedPng,
-      lineSelectedPng
+      img.boardPng,
+      img.whitePawnPng,
+      img.whitePawnSidePng,
+      img.whitePawnSelectedPng,
+      img.blackPawnPng,
+      img.blackPawnSidePng,
+      img.blackPawnSelectedPng,
+      img.lineSelectedPng
     ])
     .load(setup)
 }

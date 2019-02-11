@@ -8,11 +8,27 @@ class BrokenLine extends PIXI.Container {
     this.xType = types.BROKEN_LINE
     this.width = ratios.broken_line.width
     this.height = ratios.broken_line.height
+    this.moves = []
+
     this.countStyle = new PIXI.TextStyle({
       fontFamily: "Arial",
       fontSize: 42,
       fill: "white",
-      stroke: '#ff3300',
+      stroke: '#000000',
+      strokeThickness: 1,
+      dropShadow: true,
+      dropShadowColor: "#000000",
+      dropShadowBlur: 4,
+      dropShadowDistance: -2,
+      dropShadowAngle: 30,
+      dropShadowAlpha: .6,
+    })
+
+    this.highLightStyle = new PIXI.TextStyle({
+      fontFamily: "Arial",
+      fontSize: 42,
+      fill: "#75ba0d",
+      stroke: '#000000',
       strokeThickness: 1,
       dropShadow: true,
       dropShadowColor: "#000000",
@@ -33,23 +49,33 @@ class BrokenLine extends PIXI.Container {
   }
 
   updateCount () {
-    const newCount = this.children.filter(child => child && child.xType && child.xType === types.GAME_PAWN).length
-    const countChild = this.children.find(child => child && child.xType && child.xType === types.BROKEN_COUNTER)
-    countChild.text = newCount
-    countChild.visible = newCount
+    const newCount = this.children.length - 1
+    const counter = this.children[0]
 
-    if (newCount && this.number === 0) {
-      this._lockGamePawns()
-    }
+    counter.text = newCount
+    counter.visible = !!newCount
   }
 
   orderPawns () {
-    const pawns = this.children.filter(child => child && child.xType && child.xType === types.GAME_PAWN)
+    const pawns = this.children.slice(1)
     pawns.forEach((pawn, i, arr) => {
       TweenMax.to(pawn.position, .5, { x: 0, y: ratios.COUNT_HEIGHT })
     })
 
     this.updateCount()
+  }
+
+  toggleHighlight (val) {
+    this.children[0].style = val
+      ? this.highLightStyle
+      : this.countStyle
+  }
+
+  toggleSelected (val) {
+    if (this.children.length > 1) {
+      val && this.children[this.children.length - 1].setSelected()
+      !val && this.children[this.children.length - 1].setSolid()
+    }
   }
 }
 

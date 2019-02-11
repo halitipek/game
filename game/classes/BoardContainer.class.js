@@ -10,7 +10,6 @@ class BoardContainer extends PIXI.Container {
     this.width = ratios.W
     this.height = ratios.H
     this.xType = types.BOARD_CONTAINER
-    this.name = types.BOARD_CONTAINER
     this.position.set(0, 0)
   }
 
@@ -22,6 +21,14 @@ class BoardContainer extends PIXI.Container {
     this.width = ratios.W * ratio
     this.height = ratios.H * ratio
     this.scale.set(ratio, ratio)
+  }
+
+  updateBoard () {
+    this.children.forEach(child => {
+      if (child.xType.includes('LINE')) {
+        child.orderPawns && child.orderPawns()
+      }
+    })
   }
 }
 
