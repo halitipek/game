@@ -101,7 +101,7 @@ module.exports = [
       ]
     },
     output: {
-      filename: 'game.js',
+      filename: 'js/game.js',
       path: gameDir
     }
   }
